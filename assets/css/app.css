@@ -3,3 +3,22 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+
+.home {
+  height: 100vh;
+  background-image: url("/images/lian_full.jpg");
+  background-size: cover;
+  font-size: 1.6em;
+  text-align: center;
+  letter-spacing: 0.01em;
+  line-height: 100%;
+  margin: 0 auto;
+}
+
+.home header {
+    line-height: 140%;
+}
+
+.home p {
+  font-size: 0.7em;
+}
