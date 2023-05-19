@@ -19,6 +19,7 @@ defmodule AikokushaWeb.Router do
 
     get "/phoenix", PageController, :home
     get "/", HomeController, :home
+    get "/chat", ChatController, :home
   end
 
   # Other scopes may use custom stacks.

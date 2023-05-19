@@ -16,9 +16,14 @@
 }
 
 .home header {
-    line-height: 140%;
+  line-height: 140%;
 }
 
 .home p {
   font-size: 0.7em;
+}
+
+.chat {
+  background-image: url("/images/weiwei.jpg");
+  background-size: cover;
 }
