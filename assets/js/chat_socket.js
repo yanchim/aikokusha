@@ -90,7 +90,7 @@ if (window.location.href.includes("chat")) {
   // Send the message to the server on "shout" channel
   const sendMessage = () => {
     channel.push("shout", {
-      // Get value of "name" of person sending the message. Set guest as default
+      // Get value of "name" of person sending the message.
       name: name.value || "爱国者",
       // Get message text (value) from msg input field.
       message: msg.value,
@@ -130,41 +130,56 @@ if (window.location.href.includes("chat")) {
 
   // Listen for the [Enter] keypress event to send a message.
   msg.addEventListener("keypress", (event) => {
-    if (event.code === "Enter" && msg.value.length > 0) {
-      // don't sent empty msg.
+    if (
+      (event.code === "Enter" || event.code === "NumpadEnter") &&
+      msg.value.length > 0
+    ) {
+      // Don't sent empty msg.
       sendMessage();
     }
   });
 
-  // On "Send" button press.
+  // On send button press.
   send.addEventListener("click", (_event) => {
     if (msg.value.length > 0) {
-      // don't sent empty msg.
+      // Don't sent empty msg.
       sendMessage();
     }
   });
 
   // Date formatting.
   const formatDate = (datetime) => {
-    const m = new Date(datetime);
+    // Convert datebase time to UTC time.
+    if (datetime.charAt(datetime.length - 1) !== "Z") {
+      datetime = datetime + "Z";
+    }
+
+    const date = new Date(datetime);
+
     return (
-      m.getUTCFullYear() +
+      date.getFullYear() +
       "/" +
-      ("0" + (m.getUTCMonth() + 1)).slice(-2) +
+      ("0" + (date.getMonth() + 1)).slice(-2) +
       "/" +
-      ("0" + m.getUTCDate()).slice(-2)
+      ("0" + date.getDate()).slice(-2)
     );
   };
 
   // Time formatting.
   const formatTime = (datetime) => {
-    const m = new Date(datetime);
+    // Convert datebase time to UTC time.
+    if (datetime.charAt(datetime.length - 1) !== "Z") {
+      datetime = datetime + "Z";
+    }
+
+    const time = new Date(datetime);
+
     return (
-      ("0" + m.getUTCHours()).slice(-2) +
+      ("0" + time.getHours()).slice(-2) +
       ":" +
-      ("0" + m.getUTCMinutes()).slice(-2) +
+      ("0" + time.getMinutes()).slice(-2) +
       ":" +
-      ("0" + m.getUTCSeconds()).slice(-2)
+      ("0" + time.getSeconds()).slice(-2)
     );
   };
 }
