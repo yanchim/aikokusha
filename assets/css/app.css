@@ -1,13 +1,15 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 /* This file is for your main application CSS */
 
 .home {
   height: 100vh;
-  background-image: url("/images/lian_full.jpg");
+  background-image: url('/images/lian_full.jpg');
+  background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   font-size: 1.6em;
   text-align: center;
   letter-spacing: 0.01em;
@@ -24,6 +26,7 @@
 }
 
 .chat {
-  background-image: url("/images/weiwei.jpg");
-  background-size: cover;
+  background-image: url('/images/weiwei.jpg');
+  background-size: 100% auto;
+  background-repeat: repeat-y;
 }

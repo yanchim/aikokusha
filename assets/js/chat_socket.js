@@ -2,11 +2,11 @@
 // you uncomment its entry in "assets/js/app.js".
 
 // Bring in Phoenix channels client library:
-import { Socket } from "phoenix";
+import { Socket } from 'phoenix';
 
 // And connect to the path in "lib/aikokusha_web/endpoint.ex". We pass the
 // token for authentication. Read below how it should be used.
-let socket = new Socket("/socket", { params: { token: window.userToken } });
+let socket = new Socket('/socket', { params: { token: window.userToken } });
 
 // When you connect, you'll often need to authenticate the client.
 // For example, imagine you have an authentication plug, `MyAuth`,
@@ -61,37 +61,37 @@ socket.connect();
 //   .receive("ok", resp => { console.log("Joined successfully", resp) })
 //   .receive("error", resp => { console.log("Unable to join", resp) })
 
-let channel = socket.channel("room:lobby", {});
+let channel = socket.channel('room:lobby', {});
 
-if (window.location.href.includes("chat")) {
+if (window.location.href.includes('chat')) {
   // List of messages.
-  const ul = document.getElementById("msg-list");
+  const ul = document.getElementById('msg-list');
   // Name of message sender.
-  const name = document.getElementById("name");
+  const name = document.getElementById('name');
   // Message input field.
-  const msg = document.getElementById("msg");
+  const msg = document.getElementById('msg');
   // Send button.
-  const send = document.getElementById("send");
+  const send = document.getElementById('send');
 
   channel
     .join()
-    .receive("ok", (resp) => {
-      console.log("Joined successfully", resp);
+    .receive('ok', (resp) => {
+      console.log('Joined successfully', resp);
     })
-    .receive("error", (resp) => {
-      console.log("Unable to join", resp);
+    .receive('error', (resp) => {
+      console.log('Unable to join', resp);
     });
 
   // Listening to 'shout' events.
-  channel.on("shout", (payload) => {
+  channel.on('shout', (payload) => {
     render_message(payload);
   });
 
-  // Send the message to the server on "shout" channel
+  // Send the message to the server on "shout" channel.
   const sendMessage = () => {
-    channel.push("shout", {
+    channel.push('shout', {
       // Get value of "name" of person sending the message.
-      name: name.value || "爱国者",
+      name: name.value || '爱国者',
       // Get message text (value) from msg input field.
       message: msg.value,
       // Date + time of when the message was sent.
@@ -99,15 +99,15 @@ if (window.location.href.includes("chat")) {
     });
 
     // Reset the message input field for next message.
-    msg.value = "";
+    msg.value = '';
     // Scroll to the end of the page on send.
     window.scrollTo(0, document.documentElement.scrollHeight);
   };
 
-  // Render the message with Tailwind styles
+  // Render the message with Tailwind styles.
   const render_message = (payload) => {
     // Create new list item DOM element.
-    const li = document.createElement("li");
+    const li = document.createElement('li');
 
     // Message HTML with Tailwind CSS Classes for layout/style.
     li.innerHTML = `
@@ -115,7 +115,7 @@ if (window.location.href.includes("chat")) {
     <div class="text-left w-1/5 font-semibold text-red-800 break-words">
       ${payload.name}
       <div class="text-xs mr-1">
-        <span class="font-thin">${formatDate(payload.inserted_at)}</span> 
+        <span class="font-thin">${formatDate(payload.inserted_at)}</span>
         <span>${formatTime(payload.inserted_at)}</span>
       </div>
     </div>
@@ -129,9 +129,9 @@ if (window.location.href.includes("chat")) {
   };
 
   // Listen for the [Enter] keypress event to send a message.
-  msg.addEventListener("keypress", (event) => {
+  msg.addEventListener('keypress', (event) => {
     if (
-      (event.code === "Enter" || event.code === "NumpadEnter") &&
+      (event.code === 'Enter' || event.code === 'NumpadEnter') &&
       msg.value.length > 0
     ) {
       // Don't sent empty msg.
@@ -140,7 +140,7 @@ if (window.location.href.includes("chat")) {
   });
 
   // On send button press.
-  send.addEventListener("click", (_event) => {
+  send.addEventListener('click', (_event) => {
     if (msg.value.length > 0) {
       // Don't sent empty msg.
       sendMessage();
@@ -150,36 +150,36 @@ if (window.location.href.includes("chat")) {
   // Date formatting.
   const formatDate = (datetime) => {
     // Convert datebase time to UTC time.
-    if (datetime.charAt(datetime.length - 1) !== "Z") {
-      datetime = datetime + "Z";
+    if (datetime.charAt(datetime.length - 1) !== 'Z') {
+      datetime = datetime + 'Z';
     }
 
     const date = new Date(datetime);
 
     return (
       date.getFullYear() +
-      "/" +
-      ("0" + (date.getMonth() + 1)).slice(-2) +
-      "/" +
-      ("0" + date.getDate()).slice(-2)
+      '/' +
+      ('0' + (date.getMonth() + 1)).slice(-2) +
+      '/' +
+      ('0' + date.getDate()).slice(-2)
     );
   };
 
   // Time formatting.
   const formatTime = (datetime) => {
     // Convert datebase time to UTC time.
-    if (datetime.charAt(datetime.length - 1) !== "Z") {
-      datetime = datetime + "Z";
+    if (datetime.charAt(datetime.length - 1) !== 'Z') {
+      datetime = datetime + 'Z';
     }
 
     const time = new Date(datetime);
 
     return (
-      ("0" + time.getHours()).slice(-2) +
-      ":" +
-      ("0" + time.getMinutes()).slice(-2) +
-      ":" +
-      ("0" + time.getSeconds()).slice(-2)
+      ('0' + time.getHours()).slice(-2) +
+      ':' +
+      ('0' + time.getMinutes()).slice(-2) +
+      ':' +
+      ('0' + time.getSeconds()).slice(-2)
     );
   };
 }
