@@ -19,7 +19,14 @@ config :aikokusha, Aikokusha.Repo,
 config :aikokusha, AikokushaWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {0, 0, 0, 0}, port: 4000],
+  http: [ip: {0, 0, 0, 0}, port: 80],
+  https: [
+    port: 443,
+    cipher_suite: :strong,
+    keyfile: "/usr/local/etc/cert/aiguozhe.key",
+    certfile: "/usr/local/etc/cert/aiguozhe.fullchain"
+  ],
+  force_ssl: [rewrite_on: [:x_forwarded_proto], host: nil],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
