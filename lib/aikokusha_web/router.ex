@@ -23,9 +23,14 @@ defmodule AikokushaWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", AikokushaWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", AikokushaWeb do
+    pipe_through :api
+
+    get "/subscribe", SubscribeController, :singbox
+    get "/subscribecn", SubscribeController, :singboxcn
+
+    get "/subscribe-sscn", SubscribeController, :sscn
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:aikokusha, :dev_routes) do
